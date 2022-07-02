@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ExpenseServices from '../services/ExpenseServices'
+import { withRouter } from '../components/withRouter';
 
 class ListExpenseComponent extends Component {
     constructor(props) {
@@ -8,6 +9,11 @@ class ListExpenseComponent extends Component {
         this.state = {
             expenses: [],
         }
+        this.addExpense = this.addExpense.bind(this);
+    }
+
+    addExpense() {
+        this.props.navigate('/add-expense')
     }
 
     componentDidMount() {
@@ -15,10 +21,15 @@ class ListExpenseComponent extends Component {
             this.setState({expenses: res.data});
         })
     }
+
     render() {
         return (
             <div>
                 <h2 className="text-center">List of Expenses</h2>
+                <div className="row">
+                    {/* <Link to="/add-expense">Add Expense</Link> */}
+                    <button className="btn-btn-primary" onClick={this.addExpense}>Add Expense</button>
+                </div>
                 <div className="row">
                     <table className="table table-striped table-bordered">
                         <thead>
@@ -51,4 +62,4 @@ class ListExpenseComponent extends Component {
     }
 }
 
-export default ListExpenseComponent;
+export default withRouter(ListExpenseComponent);

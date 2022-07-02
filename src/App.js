@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import HeaderComponent from './components/HeaderComponent';
 import ListExpenseComponent from './components/ListExpenseComponent';
 import FooterComponent from './components/FooterComponent';
+import AddExpenseComponent from './components/AddExpenseComponent';
 
 function App() {
   return (
@@ -12,9 +13,9 @@ function App() {
           <HeaderComponent />
           <div className="container">
             <Routes> http://localhost:3000/
-              <Route path="/" element={<ListExpenseComponent />} />
+              <Route path="/" exact element={<ListExpenseComponent />} />
               <Route path="/expenses" element={<ListExpenseComponent />} />
-              {/* <ListExpenseComponent /> */}
+              <Route path="/add-expense" element={<AddExpenseComponent />} />
             </Routes>
           </div>
           <FooterComponent />
