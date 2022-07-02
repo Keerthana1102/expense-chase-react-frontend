@@ -21,6 +21,22 @@ class AddExpenseComponent extends Component {
         this.expenseAdded = this.expenseAdded.bind(this);
     }
 
+    componentDidMount() {
+        const {id} = this.props.params;
+        if(id === '_add') {
+            return;
+        }
+        ExpenseServices.getExpenseById(id).then((res) => {
+            let expense = res.data;
+            this.setState({
+                category: expense.category,
+                amount: expense.amount,
+                description: expense.description,
+                expensedate: expense.expensedate,
+            });
+        })
+    }
+
     changeCategory = (event) => {
         this.setState({category: event.target.value});
     }
@@ -44,16 +60,33 @@ class AddExpenseComponent extends Component {
     saveExpense = (e) => {
         e.preventDefault();
         let expense = {category: this.state.category, description: this.state.description, expensedate: this.state.expensedate, amount: this.state.amount};
-        console.log('Expense => ' + JSON.stringify(expense));
 
-        ExpenseServices.addExpense(expense).then(res => {
-            this.props.navigate('/expenses')
-        });
+        const {id} = this.props.params;
+        if(id === '_add') {
+            ExpenseServices.addExpense(expense).then(res => {
+                this.props.navigate('/expenses')
+            });
+        }
+        else {
+            ExpenseServices.updateExpense(expense, id).then(res => {
+                this.props.navigate('/expenses')
+            });
+        }
 
     }
 
     cancelExpense() {
         this.props.navigate('/expenses')
+    }
+
+    getTitle() {
+        const {id} = this.props.params;
+        if(id === '_add') {
+            return <h3 className="text-center">Add Expense</h3>
+        }
+        else {
+            return <h3 className="text-center">Update Expense</h3>
+        }
     }
 
     render() {
@@ -62,7 +95,7 @@ class AddExpenseComponent extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="card col-md-6 offset-md-3 offset-md-3">
-                            <h3 className="text-center">Add Expense</h3>
+                            {this.getTitle()}
                             <div className="card-body">
                                 <form>
                                     <div className="form-group">

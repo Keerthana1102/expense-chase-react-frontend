@@ -15,7 +15,7 @@ function App() {
             <Routes> http://localhost:3000/
               <Route path="/" exact element={<ListExpenseComponent />} />
               <Route path="/expenses" element={<ListExpenseComponent />} />
-              <Route path="/add-expense" element={<AddExpenseComponent />} />
+              <Route path="/add-expense/:id" element={<AddExpenseComponent />} />
             </Routes>
           </div>
           <FooterComponent />

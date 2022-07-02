@@ -10,10 +10,15 @@ class ListExpenseComponent extends Component {
             expenses: [],
         }
         this.addExpense = this.addExpense.bind(this);
+        this.updateExpense =this.updateExpense.bind(this);
     }
 
     addExpense() {
-        this.props.navigate('/add-expense')
+        this.props.navigate('/add-expense/_add')
+    }
+
+    updateExpense(id) {
+        this.props.navigate(`/add-expense/${id}`);
     }
 
     componentDidMount() {
@@ -27,7 +32,6 @@ class ListExpenseComponent extends Component {
             <div>
                 <h2 className="text-center">List of Expenses</h2>
                 <div className="row">
-                    {/* <Link to="/add-expense">Add Expense</Link> */}
                     <button className="btn-btn-primary" onClick={this.addExpense}>Add Expense</button>
                 </div>
                 <div className="row">
@@ -51,6 +55,9 @@ class ListExpenseComponent extends Component {
                                         <td>{expense.description}</td>
                                         <td>{expense.expensedate}</td>
                                         <td>{expense.amount}</td>
+                                        <td>
+                                            <button className="btn btn-info" onClick={() => this.updateExpense(expense.id)}>Update</button>
+                                        </td>
                                     </tr>
                                     )
                             }

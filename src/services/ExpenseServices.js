@@ -9,9 +9,15 @@ class ExpenseService {
     }
 
     addExpense(expense) {
-        let temp = axios.post(EXPENSE_API_BASE_URL, expense);
-        console.log(temp)
-        return temp
+        return axios.post(EXPENSE_API_BASE_URL, expense);
+    }
+
+    getExpenseById(expenseId) {
+        return axios.get(EXPENSE_API_BASE_URL + '/' + expenseId);
+    }
+
+    updateExpense(expense, expenseId) {
+        return axios.put(EXPENSE_API_BASE_URL + '/' + expenseId, expense);
     }
 }
 
