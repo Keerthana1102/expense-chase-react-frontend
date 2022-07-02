@@ -14,7 +14,9 @@ class HeaderComponent extends Component {
             <div>
                 <header>
                     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-                        <div className="navbar-brand">Expense Chase</div>
+                    <div class="container-fluid">
+                        <span class="navbar-brand mb-0 h1">Expense Chase</span>
+                    </div>
                     </nav>
                 </header>
             </div>

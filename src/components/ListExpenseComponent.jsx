@@ -38,9 +38,7 @@ class ListExpenseComponent extends Component {
         return (
             <div>
                 <h2 className="text-center">List of Expenses</h2>
-                <div className="row">
-                    <button className="btn-btn-primary" onClick={this.addExpense}>Add Expense</button>
-                </div>
+                <button className="btn btn-outline-primary" onClick={this.addExpense}>Add Expense</button>
                 <div className="row">
                     <table className="table table-striped table-bordered">
                         <thead>
