@@ -10,7 +10,8 @@ class ListExpenseComponent extends Component {
             expenses: [],
         }
         this.addExpense = this.addExpense.bind(this);
-        this.updateExpense =this.updateExpense.bind(this);
+        this.updateExpense = this.updateExpense.bind(this);
+        this.deleteExpense = this.deleteExpense.bind(this);
     }
 
     addExpense() {
@@ -19,6 +20,12 @@ class ListExpenseComponent extends Component {
 
     updateExpense(id) {
         this.props.navigate(`/add-expense/${id}`);
+    }
+
+    deleteExpense(id) {
+        ExpenseServices.deleteExpense(id).then((res) => {
+            this.setState({expenses: this.state.expenses.filter(expense => expense.id !== id)}) ;
+        })
     }
 
     componentDidMount() {
@@ -57,6 +64,7 @@ class ListExpenseComponent extends Component {
                                         <td>{expense.amount}</td>
                                         <td>
                                             <button className="btn btn-info" onClick={() => this.updateExpense(expense.id)}>Update</button>
+                                            <button className="btn btn-danger" style={{marginLeft: "10px"}} onClick={() => this.deleteExpense(expense.id)}>Delete</button>
                                         </td>
                                     </tr>
                                     )

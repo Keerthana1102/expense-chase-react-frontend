@@ -19,6 +19,10 @@ class ExpenseService {
     updateExpense(expense, expenseId) {
         return axios.put(EXPENSE_API_BASE_URL + '/' + expenseId, expense);
     }
+
+    deleteExpense(expenseId) {
+        return axios.delete(EXPENSE_API_BASE_URL + '/' + expenseId);
+    }
 }
 
 export default new ExpenseService()
